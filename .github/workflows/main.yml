@@ -33,6 +33,7 @@ jobs:
         host: ${{ secrets.GCE_HOST }}
         username: ${{ secrets.GCE_USERNAME }}
         key: ${{ secrets.GCE_SSH_KEY }}
+        passphrase: ${{ secrets.GCE_PASSPHRASE }}
         port: 22
         script: |
           cd node-app-githubactions/
