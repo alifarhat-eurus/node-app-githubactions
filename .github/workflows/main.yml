@@ -38,4 +38,5 @@ jobs:
           cd node-app-githubactions/
           git pull https://github.com/alifarhat-eurus/node-app-githubactions.git
           npm install 
-          node app.js
+          npm install -g pm2
+          pm2 start app.js
