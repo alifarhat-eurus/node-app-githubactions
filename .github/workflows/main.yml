@@ -1,4 +1,4 @@
-name: CI/CD with GCE version 1 and 2
+name: CI/CD with GCE version 1
 
 on:
   push:
@@ -36,6 +36,6 @@ jobs:
         port: 22
         script: |
           cd /home/${{ secrets.GCE_USERNAME }}
-          git clone https://github.com/alifarhat-${{ secrets.GCE_USERNAME }}/node-app-githubactions.git && cd node-app-githubactions/ && npm install && npm install -g pm2 
-          pm2 start /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions/app.js -f --name nodeapp
+          git pull https://github.com/alifarhat-${{ secrets.GCE_USERNAME }}/node-app-githubactions.git && cd node-app-githubactions/ && npm install
+          pm2 restart nodeapp
           pm2 save
