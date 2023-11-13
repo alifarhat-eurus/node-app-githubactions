@@ -35,7 +35,8 @@ jobs:
         key: ${{ secrets.GCE_SSH_KEY }}
         port: 22
         script: |
+          touch file1.txt
           cd /home/${{ secrets.GCE_USERNAME }}
-          git pull https://github.com/alifarhat-eurus/node-app-githubactions.git && cd node-app-githubactions/ && npm install && npm install -g pm2 
+          git pull https://github.com/alifarhat-${{ secrets.GCE_USERNAME }}/node-app-githubactions.git && cd node-app-githubactions/ && npm install && npm install -g pm2 
           pm2 start /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions/app.js -f --name nodeapp
           pm2 save
