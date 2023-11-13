@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('Hello! Nouman, barrooooooooooooooooooooo :D ');
+    res.send('GCP, DevOps, Terraform, Azure, Jenkins :D ');
 });
 
 const port = 3000;
