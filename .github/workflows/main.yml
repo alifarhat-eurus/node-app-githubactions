@@ -37,5 +37,6 @@ jobs:
         script: |
           cd /home/${{ secrets.GCE_USERNAME }}
           cd node-app-githubactions/ && git pull https://github.com/alifarhat-${{ secrets.GCE_USERNAME }}/node-app-githubactions.git &&  npm install
+          pm2 start /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions/app.js -f --name nodeapp
           pm2 restart nodeapp
           pm2 save
