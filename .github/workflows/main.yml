@@ -1,4 +1,4 @@
-name: CI/CD with GCE
+name: CI/CD with GCE version 1
 
 on:
   push:
