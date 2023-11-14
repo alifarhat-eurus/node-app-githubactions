@@ -43,6 +43,10 @@ jobs:
         name: nodeapp-artifact
         path: ${{ github.workspace }}
 
+    - name: Display structure of downloaded files
+      run: ls -R
+      working-directory: /home/runner/work/node-app-githubactions/node-app-githubactions  
+
 
     - name: Extract artifact
       run: |
