@@ -46,7 +46,7 @@ jobs:
 
     - name: Extract artifact
       run: |
-        tar -xvf nodeapp-artifact.tar.gz -C /home/${{ secrets.GCE_USERNAME }}    
+        tar -xvf /home/runner/work/node-app-githubactions/node-app-githubactions/nodeapp-artifact.tar.gz -C /home/${{ secrets.GCE_USERNAME }}    
 
     - name: SSH into GCE and deploy
       uses: appleboy/ssh-action@v1.0.0
