@@ -50,7 +50,7 @@ jobs:
 
     - name: Copy artifact to host machine
       run: |
-        scp -i ${{ secrets.GCE_SSH_KEY }} -r ${{ github.workspace }}/node-app-githubactions ${{ secrets.GCE_USERNAME }}@${{ secrets.GCE_HOST }}:/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
+        scp -i ${{ secrets.GCE_SSH_KEY }} -r ${{ github.workspace }} ${{ secrets.GCE_USERNAME }}@${{ secrets.GCE_HOST }}:/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
       
 
 
