@@ -53,7 +53,7 @@ jobs:
         host: ${{ secrets.GCE_HOST }}
         username: ${{ secrets.GCE_USERNAME }}
         key: ${{ secrets.GCE_SSH_KEY }}
-        source: "${{ github.workspace }}/github/workspace/*"
+        source: "*"
         target: "/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions/"
         rm: true
 
