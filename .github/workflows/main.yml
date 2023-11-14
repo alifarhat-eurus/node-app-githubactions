@@ -45,7 +45,7 @@ jobs:
 
     - name: Display structure of downloaded files
       run: ls -R
-      working-directory: /home/runner/work/node-app-githubactions/node-app-githubactions
+      working-directory: ${{ github.workspace }}
       
     - name: Copy artifact to host machine
       uses: appleboy/scp-action@v0.1.4
