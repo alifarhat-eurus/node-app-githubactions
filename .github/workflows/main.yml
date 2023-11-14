@@ -75,5 +75,4 @@ jobs:
           cd /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
           pm2 stop nodeapp
           pm2 start /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions/app.js -f --name nodeapp
-          pm2 restart nodeapp
           pm2 save
