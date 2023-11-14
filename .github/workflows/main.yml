@@ -63,7 +63,7 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.GCE_HOST }} >> ~/.ssh/known_hosts
           cd /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
-          scp -i ${{ secrets.GCE_SSH_KEY }} -r ${{ github.workspace }}/node-app-githubactions ${{ secrets.GCE_USERNAME }}@${{ secrets.GCE_HOST }}:/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
+          scp -i ${{ secrets.GCE_SSH_KEY }} -r ${{ github.workspace }}/node-app-githubactions ${{ secrets.GCE_USERNAME }}@${{ secrets.GCE_HOST }}:/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions 
           pm2 stop nodeapp
           pm2 start /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions/app.js -f --name nodeapp
           pm2 restart nodeapp
