@@ -47,11 +47,14 @@ jobs:
       run: ls -R
       working-directory: /home/runner/work/node-app-githubactions/node-app-githubactions
       
-
     - name: Copy artifact to host machine
-      run: |
-        scp -r ${{ github.workspace }} ${{ secrets.GCE_USERNAME }}@${{ secrets.GCE_HOST }}:/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
-      
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.GCE_HOST }}
+        username: ${{ secrets.GCE_USERNAME }}
+        key: ${{ secrets.GCE_SSH_KEY }}
+        source: ${{ github.workspace }}
+        target: /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
 
 
     # - name: Extract artifact
