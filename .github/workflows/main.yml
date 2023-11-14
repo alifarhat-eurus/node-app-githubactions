@@ -20,6 +20,15 @@ jobs:
 
     - name: Install dependencies
       run: npm install 
+    
+    - name: Build Artifact
+      run: npm run build
+      
+    - name: Archive Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: nodeapp-artifact
+        path: ${{ github.workspace }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -27,6 +36,18 @@ jobs:
     needs: build
 
     steps:
+
+    - name: Download Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: nodeapp-artifact
+        path: ${{ github.workspace }}
+
+
+    - name: Extract artifact
+      run: |
+        tar -xvf nodeapp-artifact.tar.gz -C /home/${{ secrets.GCE_USERNAME }}    
+
     - name: SSH into GCE and deploy
       uses: appleboy/ssh-action@v1.0.0
       with:
@@ -35,8 +56,8 @@ jobs:
         key: ${{ secrets.GCE_SSH_KEY }}
         port: 22
         script: |
-          cd /home/${{ secrets.GCE_USERNAME }}
-          cd node-app-githubactions/ && git pull https://github.com/alifarhat-${{ secrets.GCE_USERNAME }}/node-app-githubactions.git &&  npm install
+          cd /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
+          scp -r /home/${{ secrets.GCE_USERNAME }}/nodeapp-artifact {{ secrets.GCE_USERNAME }}@{{ secrets.GCE_HOST }}:/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
           pm2 start /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions/app.js -f --name nodeapp
           pm2 restart nodeapp
           pm2 save
