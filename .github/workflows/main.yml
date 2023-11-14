@@ -48,9 +48,9 @@ jobs:
       working-directory: /home/runner/work/node-app-githubactions/node-app-githubactions  
 
 
-    - name: Extract artifact
-      run: |
-        tar -xvf /home/runner/work/node-app-githubactions/node-app-githubactions/nodeapp-artifact.tar.gz -C /home/${{ secrets.GCE_USERNAME }}    
+    # - name: Extract artifact
+    #   run: |
+    #     tar -xvf /home/runner/work/node-app-githubactions/node-app-githubactions/nodeapp-artifact.tar.gz -C /home/${{ secrets.GCE_USERNAME }}    
 
     - name: SSH into GCE and deploy
       uses: appleboy/ssh-action@v1.0.0
@@ -61,7 +61,7 @@ jobs:
         port: 22
         script: |
           cd /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
-          scp -r /home/${{ secrets.GCE_USERNAME }}/nodeapp-artifact {{ secrets.GCE_USERNAME }}@{{ secrets.GCE_HOST }}:/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
+          scp -r ${{ github.workspace }}/node-app-githubactions {{ secrets.GCE_USERNAME }}@{{ secrets.GCE_HOST }}:/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
           pm2 start /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions/app.js -f --name nodeapp
           pm2 restart nodeapp
           pm2 save
