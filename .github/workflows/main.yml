@@ -62,6 +62,7 @@ jobs:
         script: |
           cd /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
           scp -o StrictHostKeyChecking=no -r ${{ github.workspace }}/node-app-githubactions ${{ secrets.GCE_USERNAME }}@${{ secrets.GCE_HOST }}:/home/${{ secrets.GCE_USERNAME }}/node-app-githubactions
+          pm2 stop nodeapp
           pm2 start /home/${{ secrets.GCE_USERNAME }}/node-app-githubactions/app.js -f --name nodeapp
           pm2 restart nodeapp
           pm2 save
